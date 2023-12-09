@@ -10,6 +10,7 @@ import UsersPage from '../pages/admin/UsersPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import Layout from '../components/layout/Layout'
 import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
 
 
 function AppRouter() {
@@ -19,12 +20,12 @@ function AppRouter() {
         
         <Routes>
             <Route exact path='/' element={<HomePage/>}/>
-            <Route exact path='/login' element={<LoginPage/>}/>
-            <Route exact path='/register' element={<RegisterPage/>}/>
+            <Route exact path='/login' element={<PublicRoute><LoginPage/></PublicRoute>}/>
+            <Route exact path='/register' element={<PublicRoute><RegisterPage/></PublicRoute>}/>
             <Route exact path='/account' element={<PrivateRoute><AccountPage/></PrivateRoute>}/>
             <Route exact path='/projects' element={<PrivateRoute><ProjectsPage/></PrivateRoute>}/>
             <Route exact path='/project/:projectId' element={<PrivateRoute><ProjectPage/></PrivateRoute>}/>
-            <Route exact path='/admin/users' element={<PrivateRoute><UsersPage/></PrivateRoute>}/>
+            <Route exact path='/admin/users' element={<PrivateRoute hasRole="admin"><UsersPage/></PrivateRoute>}/>
 
             <Route path='*' element={<NotFoundPage/>}/>
 
